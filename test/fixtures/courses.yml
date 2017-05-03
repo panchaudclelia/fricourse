@@ -1,0 +1,59 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  semester: MyString
+  name: MyString
+  name_english: MyString
+  description: MyString
+  code: MyString
+  language: MyString
+  lecturer: MyString
+  assistant: MyString
+  level: MyString
+  hours_per_week: 1
+  ects: 1.5
+  goals: MyText
+  references: MyString
+  frequency: MyString
+  time_schedule: MyString
+  number_of_students: MyString
+  softskill_students: MyString
+  free_auditor: false
+  erasmus_students: MyString
+  condition: MyString
+  examination_regulation: MyString
+  exam_session: MyString
+  exam_date: 2017-04-27 19:44:37
+  type_of_evaluation: MyString
+  exam_duration: MyString
+  exam_language: MyString
+  study_program: MyString
+
+two:
+  semester: MyString
+  name: MyString
+  name_english: MyString
+  description: MyString
+  code: MyString
+  language: MyString
+  lecturer: MyString
+  assistant: MyString
+  level: MyString
+  hours_per_week: 1
+  ects: 1.5
+  goals: MyText
+  references: MyString
+  frequency: MyString
+  time_schedule: MyString
+  number_of_students: MyString
+  softskill_students: MyString
+  free_auditor: false
+  erasmus_students: MyString
+  condition: MyString
+  examination_regulation: MyString
+  exam_session: MyString
+  exam_date: 2017-04-27 19:44:37
+  type_of_evaluation: MyString
+  exam_duration: MyString
+  exam_language: MyString
+  study_program: MyString

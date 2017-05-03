@@ -1,0 +1,123 @@
+= form_for @course, html: { class: "form-horizontal", role: "form" } do |f|
+  -if @course.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@course.errors.count, "error")} prohibited this course from being saved:"
+
+      %ul
+        - @course.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :semester, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :semester, class: 'form-control'
+  .form-group
+    = f.label :name, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :name_english, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name_english, class: 'form-control'
+  .form-group
+    = f.label :description, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :description, class: 'form-control'
+  .form-group
+    = f.label :code, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :code, class: 'form-control'
+  .form-group
+    = f.label :language, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :language, class: 'form-control'
+  .form-group
+    = f.label :lecturer, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :lecturer, class: 'form-control'
+  .form-group
+    = f.label :assistant, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :assistant, class: 'form-control'
+  .form-group
+    = f.label :level, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :level, class: 'form-control'
+  .form-group
+    = f.label :hours_per_week, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.number_field :hours_per_week, class: 'form-control'
+  .form-group
+    = f.label :ects, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :ects, class: 'form-control'
+  .form-group
+    = f.label :goals, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_area :goals, class: 'form-control'
+  .form-group
+    = f.label :references, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :references, class: 'form-control'
+  .form-group
+    = f.label :frequency, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :frequency, class: 'form-control'
+  .form-group
+    = f.label :time_schedule, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :time_schedule, class: 'form-control'
+  .form-group
+    = f.label :number_of_students, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :number_of_students, class: 'form-control'
+  .form-group
+    = f.label :softskill_students, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :softskill_students, class: 'form-control'
+  .form-group
+    = f.label :free_auditor, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.check_box :free_auditor, class: 'form-control'
+  .form-group
+    = f.label :erasmus_students, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :erasmus_students, class: 'form-control'
+  .form-group
+    = f.label :condition, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :condition, class: 'form-control'
+  .form-group
+    = f.label :examination_regulation, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :examination_regulation, class: 'form-control'
+  .form-group
+    = f.label :exam_session, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :exam_session, class: 'form-control'
+  .form-group
+    = f.label :exam_date, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.datetime_select :exam_date, class: 'form-control'
+  .form-group
+    = f.label :type_of_evaluation, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :type_of_evaluation, class: 'form-control'
+  .form-group
+    = f.label :exam_duration, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :exam_duration, class: 'form-control'
+  .form-group
+    = f.label :exam_language, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :exam_language, class: 'form-control'
+  .form-group
+    = f.label :study_program, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :study_program, class: 'form-control'
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: 'btn btn-primary'
