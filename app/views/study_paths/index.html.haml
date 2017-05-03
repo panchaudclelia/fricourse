@@ -1,0 +1,21 @@
+.page-header
+  = link_to new_study_path_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Study Path
+  %h1 Listing study paths
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Study Path Name
+
+
+    %tbody
+      - @study_paths.each do |sp|
+        %tr
+          %td= sp.name
+
+          %td= link_to 'Show', sp
+          %td= link_to 'Edit', edit_study_path_path(sp)
+          %td= link_to 'Destroy', sp, data: { confirm: 'Are you sure?' }, method: :delete
