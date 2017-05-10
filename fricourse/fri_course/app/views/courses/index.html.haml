@@ -1,0 +1,74 @@
+.page-header
+  = link_to new_course_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Course
+  %h1 Listing courses
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Semester
+        %th Name
+        %th Name english
+        %th Description
+        %th Code
+        %th Language
+        %th Lecturer
+        %th Assistant
+        %th Level
+        %th Hours per week
+        %th Ects
+        %th Goals
+        %th References
+        %th Frequency
+        %th Time schedule
+        %th Number of students
+        %th Softskill students
+        %th Free auditor
+        %th Erasmus students
+        %th Condition
+        %th Examination regulation
+        %th Exam session
+        %th Exam date
+        %th Type of evaluation
+        %th Exam duration
+        %th Exam language
+        %th Study program
+        %th
+        %th
+        %th
+
+    %tbody
+      - @courses.each do |course|
+        %tr
+          %td= course.semester
+          %td= course.name
+          %td= course.name_english
+          %td= course.description
+          %td= course.code
+          %td= course.language
+          %td= course.lecturer
+          %td= course.assistant
+          %td= course.level
+          %td= course.hours_per_week
+          %td= course.ects
+          %td= course.goals
+          %td= course.references
+          %td= course.frequency
+          %td= course.time_schedule
+          %td= course.number_of_students
+          %td= course.softskill_students
+          %td= course.free_auditor
+          %td= course.erasmus_students
+          %td= course.condition
+          %td= course.examination_regulation
+          %td= course.exam_session
+          %td= course.exam_date
+          %td= course.type_of_evaluation
+          %td= course.exam_duration
+          %td= course.exam_language
+          %td= course.study_program
+          %td= link_to 'Show', course
+          %td= link_to 'Edit', edit_course_path(course)
+          %td= link_to 'Destroy', course, data: { confirm: 'Are you sure?' }, method: :delete

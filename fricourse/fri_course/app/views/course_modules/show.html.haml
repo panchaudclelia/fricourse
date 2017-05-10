@@ -1,0 +1,12 @@
+.page-header
+  = link_to course_modules_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_course_module_path(@course_module), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show course_module
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @course_module.name

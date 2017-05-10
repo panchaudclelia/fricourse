@@ -1,0 +1,18 @@
+= simple_form_for @course_module, html: { class: "form-horizontal", role: "form" } do |f|
+  -if @course_module.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@course_module.errors.count, "error")} prohibited this course_module from being saved:"
+
+      %ul
+        - @course_module.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.input :name
+
+  = f.association :study_paths, as: :check_boxes  
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: 'btn btn-primary'
