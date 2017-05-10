@@ -27,7 +27,10 @@
           = link_to "FriCourse", "#", class: "navbar-brand"
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li{ class: current_page?(controller: 'courses') ? 'active' : nil }= link_to "Cours", courses_path
+            %li{ class: current_page?(controller: '/courses') ? 'active' : nil }= link_to "Cours", courses_path
+            %li{ class: current_page?(controller: '/course_modules') ? 'active' : nil }= link_to "Modules", course_modules_path
+            %li{ class: current_page?(controller: '/study_paths') ? 'active' : nil }= link_to "Study paths", study_paths_path
+            %li{ class: current_page?(controller: 'devise/registrations', action: :edit) ? 'active' : nil }= link_to "Mon compte", edit_user_registration_path
     .container
       - flash.each do |name, msg|
         = content_tag :div, class: "alert alert-#{name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do

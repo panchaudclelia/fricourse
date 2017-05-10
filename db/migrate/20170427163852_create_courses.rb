@@ -29,7 +29,7 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.string :exam_language
       t.string :study_program
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

@@ -1,2 +1,0 @@
-json.extract! course, :id, :semester, :name, :name_english, :description, :code, :language, :lecturer, :assistant, :level, :hours_per_week, :ects, :goals, :references, :frequency, :time_schedule, :number_of_students, :softskill_students, :free_auditor, :erasmus_students, :condition, :examination_regulation, :exam_session, :exam_date, :type_of_evaluation, :exam_duration, :exam_language, :study_program, :created_at, :updated_at
-json.url course_url(course, format: :json)

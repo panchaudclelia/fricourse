@@ -14,5 +14,7 @@ module FriCourse
     config.generators do |g|
        g.template_engine :haml
     end
+
+    config.autoload_paths += %W(#{config.root}/app/services)
   end
 end

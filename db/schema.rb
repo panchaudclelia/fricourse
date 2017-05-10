@@ -10,13 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503201523) do
+ActiveRecord::Schema.define(version: 20170509201555) do
 
-  create_table "articles", force: :cascade do |t|
-    t.string   "title"
-    t.text     "text"
+  create_table "belongings", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "course_module_id"
+    t.boolean  "mandatory",        default: false, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["course_id"], name: "index_belongings_on_course_id"
+    t.index ["course_module_id"], name: "index_belongings_on_course_module_id"
+  end
+
+  create_table "course_modules", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "course_modules_study_paths", force: :cascade do |t|
+    t.integer  "study_path_id"
+    t.integer  "course_module_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["course_module_id"], name: "index_course_modules_study_paths_on_course_module_id"
+    t.index ["study_path_id"], name: "index_course_modules_study_paths_on_study_path_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -51,12 +69,6 @@ ActiveRecord::Schema.define(version: 20170503201523) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "study_modules", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "study_paths", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -78,6 +90,25 @@ ActiveRecord::Schema.define(version: 20170503201523) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_courses", force: :cascade do |t|
+    t.integer  "courses_id"
+    t.integer  "users_id"
+    t.string   "grade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["courses_id"], name: "index_users_courses_on_courses_id"
+    t.index ["users_id"], name: "index_users_courses_on_users_id"
+  end
+
+  create_table "users_study_paths", force: :cascade do |t|
+    t.integer  "study_path_id"
+    t.integer  "users_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["study_path_id"], name: "index_users_study_paths_on_study_path_id"
+    t.index ["users_id"], name: "index_users_study_paths_on_users_id"
   end
 
 end
