@@ -38,6 +38,7 @@ gem 'simple_form'
 gem 'bootstrap'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'tf-idf-similarity'
+gem 'narray'
 
 gem 'devise'
 
