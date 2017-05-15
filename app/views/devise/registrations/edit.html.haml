@@ -9,7 +9,8 @@
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %p
         Currently waiting confirmation for: #{resource.unconfirmed_email}
-    = f.input :study_path, required: true, hint: "Please indicate which specialization you study"   
+
+    = f.association :study_path, collection: StudyPath.order(:name)
     = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
     = f.input :password_confirmation, required: false
     = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
@@ -19,4 +20,4 @@
 %h3 Cancel my account
 %p
   Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+= link_to "Back", :back# = f.input :study_path, required: true, hint: "Please indicate which specialization you study"

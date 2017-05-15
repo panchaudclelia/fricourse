@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :birthdate])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username,:first_name, :last_name, :birthdate])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username,:first_name, :last_name, :birthdate, :study_path_id])
   end
 
-  def layout_by_resource
-    if devise_controller? && action_name != 'edit'
+def layout_by_resource
+    if controller_name == 'sessions' || devise_controller? && !['edit', 'update'].include?(action_name)
       "simple"
     else
       "application"

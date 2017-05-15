@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   has_many :users_courses
   has_many :courses, through: :users_courses
-  has_many :users_study_paths
-  has_many :study_paths, through: :users_study_paths
+  belongs_to :study_path
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 

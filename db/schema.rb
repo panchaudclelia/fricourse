@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515095121) do
-#ActiveRecord::Schema.define(version: 20170515121109) do
+ActiveRecord::Schema.define(version: 20170515140455) do
 
   create_table "belongings", force: :cascade do |t|
     t.integer  "course_id"
@@ -91,28 +90,19 @@ ActiveRecord::Schema.define(version: 20170515095121) do
     t.datetime "updated_at",                          null: false
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "study_path"
+    t.integer  "study_path_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "users_courses", force: :cascade do |t|
-    t.integer  "course_id"
-    t.integer  "user_id"
+    t.integer  "courses_id"
+    t.integer  "users_id"
     t.string   "grade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_users_courses_on_course_id"
-    t.index ["user_id"], name: "index_users_courses_on_user_id"
-  end
-
-  create_table "users_study_paths", force: :cascade do |t|
-    t.integer  "study_path_id"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["study_path_id"], name: "index_users_study_paths_on_study_path_id"
-    t.index ["user_id"], name: "index_users_study_paths_on_user_id"
+    t.index ["courses_id"], name: "index_users_courses_on_courses_id"
+    t.index ["users_id"], name: "index_users_courses_on_users_id"
   end
 
 end
