@@ -40,9 +40,10 @@ class CalculationService
 		all_courses = Course.all
 		all_courses.find_each do |course|
 			#if course.grade
-
-			puts course.grade
-			puts course.course_id
+			#num = matrix[,] * rated_courses.find(:)
+			#denum =
+			#puts course.grade
+			#puts course.course_id
 			#end
 		end
 		#puts all_courses

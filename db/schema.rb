@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170515095121) do
-ActiveRecord::Schema.define(version: 20170515121109) do
+#ActiveRecord::Schema.define(version: 20170515121109) do
 
   create_table "belongings", force: :cascade do |t|
     t.integer  "course_id"
