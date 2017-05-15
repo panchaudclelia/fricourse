@@ -1,14 +1,14 @@
 class CalculationService
 	# descriptions = Course.select(:description).map(&:description); nil
 	# courses = CalculationService.new(descriptions); nil
-	# courses.calculateTFIDF
+	# courses.calculateTfidfMatrix
 
 	attr_reader :some_stuffs
 	def initialize(some_stuffs)
 		@some_stuffs = some_stuffs
 	end
 
-	def calculateTFIDF
+	def calculateTfidfMatrix
 		require 'matrix'
 		require 'tf-idf-similarity'
 		require 'narray'
