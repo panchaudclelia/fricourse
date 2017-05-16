@@ -1,0 +1,15 @@
+.page-header
+  %h1 Listing recommendations
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Course Name
+        %th Expected Grade
+
+    %tbody
+      - @recommendations.each do | (key,value)|
+        %tr
+          %td= Course.find(key).name
+          %td= value.round(1)

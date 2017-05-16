@@ -1,0 +1,15 @@
+= form_for @recommendation, html: { class: "form-horizontal", role: "form" } do |f|
+  -if @recommendation.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@recommendation.errors.count, "error")} prohibited this recommendation from being saved:"
+
+      %ul
+        - @recommendation.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: 'btn btn-primary'

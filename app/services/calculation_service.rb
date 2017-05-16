@@ -28,30 +28,22 @@ class CalculationService
 		model = TfIdfSimilarity::TfIdfModel.new(documents, :library => :narray)
 		matrix = model.similarity_matrix
 
-		calculatePredictions(user_id, documents, model, matrix)
-
-		#puts matrix[model.document_index(documents[2]), model.document_index(documents[3])]
+		@recommendations = calculatePredictions(user_id, documents, model, matrix)
 	end
 
 	def calculatePredictions(user_id, documents, model, matrix)
 		puts user_id
-		predictions = {}
+		@recommendations = {}
 		user = User.find(user_id)
-		#puts user
 		rated_courses = user.users_courses
-		#puts rated_courses
-		#puts documents.size
-		all_courses = Course.all
-		#loop through every course to calculate predictions for the user
+		#all_courses = Course.all
+		all_courses = Course.where(semester: ['SP 16 (cours semestriel)','FS 16 (Semesterkurs)','SS 16 (Semester Course)'])
+		#loop through current semesters courses to calculate recommendations for the user
 		all_courses.find_each.with_index do |item, i_index|
 			num = 0
 			denum = 0
-			#puts i_index
+			
 			rated_courses.find_each.with_index do |j, j_index|
-				#puts "in rated courses j each"
-				#puts j
-				#puts j_index
-				#puts j.grade.to_s
 				if model.document_index(documents[item.id]) && model.document_index(documents[j.course.id])
 					tmp =  matrix[model.document_index(documents[item.id]), model.document_index(documents[j.course.id])] * j.grade.to_f
 					num = num + tmp
@@ -60,15 +52,11 @@ class CalculationService
 					denum = denum + tmp2
 				end
 			end
-			#puts num
-			#puts denum
+
 			if denum != 0
-				predictions[item.id] = num/denum
+				@recommendations[item.id] = num/denum
 			end
-
-			#denum = matrix[model.document_index(documents[2]), model.document_index(documents[3])]
-
 		end
-		puts predictions
+		@recommendations
 	end
 end
