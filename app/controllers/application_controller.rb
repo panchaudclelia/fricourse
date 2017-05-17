@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
 
 def layout_by_resource
-    if controller_name == 'sessions' || devise_controller? && !['edit', 'update', 'delete'].include?(action_name)
+    if controller_name == 'sessions' || devise_controller? && !['edit', 'update', 'delete', 'destroy'].include?(action_name)
       "simple"
     else
       "application"

@@ -35,7 +35,7 @@ class CalculationService
 		puts user_id
 		@recommendations = {}
 		user = User.find(user_id)
-		sp = user.study_paths.first
+		sp = user.study_path
 		rated_courses = user.users_courses
 		if rated_courses.present? == false
 			rated_courses = UsersCourse.all
