@@ -34,6 +34,7 @@
             %li{ class: current_page?(controller: 'devise/registrations', action: :edit) ? 'active' : nil }= link_to "Mon compte", edit_user_registration_path
           %div.pull-right
             %p.text-right.navbar-link= User.find(current_user.id).email
+            = link_to "Log out", destroy_user_session_url, :method => :delete
     .container
       - flash.each do |name, msg|
         = content_tag :div, class: "alert alert-#{name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do
