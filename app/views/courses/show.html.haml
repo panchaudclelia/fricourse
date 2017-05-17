@@ -2,9 +2,9 @@
   = link_to courses_path, class: 'btn btn-default' do
     %span.glyphicon.glyphicon-list-alt
     Back
-  = link_to edit_course_path(@course), class: 'btn btn-primary' do
-    %span.glyphicon.glyphicon-pencil
-    Edit
+  / = link_to edit_course_path(@course), class: 'btn btn-primary' do
+  /   %span.glyphicon.glyphicon-pencil
+  /   Edit
   %h1 Show course
 
 %dl.dl-horizontal
@@ -12,8 +12,8 @@
   %dd= @course.semester
   %dt Name:
   %dd= @course.name
-  %dt Name english:
-  %dd= @course.name_english
+  / %dt Name english:
+  / %dd= @course.name_english
   %dt Description:
   %dd= @course.description
   %dt Code:

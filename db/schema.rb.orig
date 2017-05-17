@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170515095121) do
-=======
-ActiveRecord::Schema.define(version: 20170515121109) do
->>>>>>> users
+
+ActiveRecord::Schema.define(version: 20170515140455) do
+
 
   create_table "belongings", force: :cascade do |t|
     t.integer  "course_id"
