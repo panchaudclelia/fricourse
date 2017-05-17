@@ -28,31 +28,42 @@ class CalculationService
 		model = TfIdfSimilarity::TfIdfModel.new(documents, :library => :narray)
 		matrix = model.similarity_matrix
 
-		calculatePredictions(user_id, matrix)
-
-		#puts matrix[model.document_index(documents[2]), model.document_index(documents[3])]
+		@recommendations = calculatePredictions(user_id, documents, model, matrix)
 	end
 
-	def calculatePredictions(user_id, matrix)
-		predictions = []
+	def calculatePredictions(user_id, documents, model, matrix)
+		puts user_id
+		@recommendations = {}
 		user = User.find(user_id)
+		sp = user.study_paths.first
 		rated_courses = user.users_courses
-		all_courses = Course.all
-		all_courses.find_each do |course|
-			#if course.grade
-			#num = matrix[,] * rated_courses.find(:)
-			#denum =
-			#puts course.grade
-			#puts course.course_id
-			#end
+		if rated_courses.present? == false
+			rated_courses = UsersCourse.all
 		end
-		#puts all_courses
-		#Course.find_each do |course|
-		#	if course.description
-				#puts course.description.to_s
-				#document = TfIdfSimilarity::Document.new(course.description)
-				#documents.push(document)
-		#	end
-		#end
+		#all_courses = Course.all
+		all_courses = Course.where(semester: ['SP 16 (cours semestriel)','FS 16 (Semesterkurs)','SS 16 (Semester Course)'])
+		#loop through current semesters courses to calculate recommendations for the user
+		all_courses.find_each.with_index do |item, i_index|
+			#if sp.course_modules.ids.include?(item.belongings.pluck(:course_module_id).first)
+			if sp.course_modules.ids.any? {|i| item.belongings.pluck(:course_module_id).include?(i) }
+				num = 0
+				denum = 0
+
+				rated_courses.find_each.with_index do |j, j_index|
+					if model.document_index(documents[item.id]) && model.document_index(documents[j.course.id])
+						tmp =  matrix[model.document_index(documents[item.id]), model.document_index(documents[j.course.id])] * j.grade.to_f
+						num = num + tmp
+
+						tmp2 = matrix[model.document_index(documents[item.id]), model.document_index(documents[j.course.id])]
+						denum = denum + tmp2
+					end
+				end
+
+				if denum != 0
+					@recommendations[item.id] = num/denum
+				end
+			end
+		end
+		@recommendations
 	end
 end
