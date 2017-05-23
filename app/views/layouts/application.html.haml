@@ -24,7 +24,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to "FriCourse", "#", class: "navbar-brand"
+          = link_to "FriCourse", controller:'/static', class: "navbar-brand"
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li{ class: current_page?(controller: '/courses') ? 'active' : nil }= link_to "Cours", courses_path
