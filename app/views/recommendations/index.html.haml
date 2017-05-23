@@ -1,15 +1,21 @@
 .page-header
   %h1 Listing recommendations
 
+= form_tag '', :method => :get do
+  = select_tag :course_module_id, options_for_select(User.find(current_user.id).study_path.course_modules.map{|l| [l.name, l.id] }, params[:course_module_id] ), :include_blank => 'All Course Modules'
+  = submit_tag 'Filter'
+
 .table-responsive
   %table.table.table-striped.table-bordered.table-hover
     %thead
       %tr
         %th Course Name
         %th Expected Grade
+        %th Course Modules
 
     %tbody
-      - @recommendations.each do | (key,value)|
+      - @recommendations.each do | recommendation |
         %tr
-          %td= Course.find(key).name
-          %td= value.round(1)
+          %td= Course.find(recommendation.course_id).name
+          %td= recommendation.expected_grade.round(1)
+          %td= Course.find(recommendation.course_id).course_modules.pluck(:name).join(', ')

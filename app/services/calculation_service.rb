@@ -12,6 +12,7 @@ class CalculationService
 		require 'matrix'
 		require 'tf-idf-similarity'
 		require 'narray'
+
 		documents = []
 
 		#puts us_courses
@@ -60,7 +61,9 @@ class CalculationService
 				end
 
 				if denum != 0
-					@recommendations[item.id] = num/denum
+					#@recommendations[item.id] = num/denum
+					expected_grade = num/denum
+					Recommendation.create(:user_id => user_id, :course_id => item.id, :expected_grade => expected_grade)
 				end
 			end
 		end

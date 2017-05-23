@@ -4,12 +4,15 @@ class RecommendationsController < ApplicationController
   # GET /recommendations
   # GET /recommendations.json
   def index
-    #@recommendations = Recommendation.all
-    @calc_curr_user = CalculationService.new(current_user.id)
-    #@predictions = courses.calculateTfidfMatrix
-    @recommendations = @calc_curr_user.calculateTfidfMatrix.sort_by { |k, v| -v }
-    #@recommendations.sort_by
-    #@recommendations = CalculationService.new(2)
+    if params[:course_module_id].nil? || params[:course_module_id].empty?
+      @recommendations = Recommendation.where(:user_id => current_user.id)
+    else
+      @recommendations = Recommendation.where(:user_id => current_user.id).filter(params[:course_module_id])
+    end
+
+    #TODO find other place to calculate values
+    #@calc_curr_user = CalculationService.new(current_user.id)
+    #@recommendations = @calc_curr_user.calculateTfidfMatrix.sort_by { |k, v| -v }
   end
 
   # GET /recommendations/1
