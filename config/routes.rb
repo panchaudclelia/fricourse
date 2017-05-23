@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :course_modules
   #devise_for :users
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
   root 'courses#index'
 

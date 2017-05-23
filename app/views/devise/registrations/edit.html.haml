@@ -16,7 +16,7 @@
     = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
 
   .form-actions
-    = f.button :submit, "Update"
+    = f.button :submit, "Update", data_disable_with: 'Chargement...'
 
 %h3 Cancel my account
 %p

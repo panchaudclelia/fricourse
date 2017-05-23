@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-
+   prev_study_path = resource.study_path
    resource_updated = update_resource(resource, account_update_params)
    yield resource if block_given?
    if resource_updated
@@ -37,9 +37,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
      bypass_sign_in resource, scope: resource_name
 
     # ton cheni ici
-    @calc_curr_user = CalculationService.new(current_user.id)
-    @recommendations = @calc_curr_user.calculateTfidfMatrix.sort_by { |k, v| -v }
-    puts "fuck off"
+    if prev_study_path != resource.study_path
+      current_user.recommendations.destroy_all
+      @calc_curr_user = CalculationService.new(current_user.id)
+      @recommendations = @calc_curr_user.calculateTfidfMatrix.sort_by { |k, v| -v }
+    end
 
      respond_with resource, location: after_update_path_for(resource)
    else
