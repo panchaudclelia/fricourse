@@ -1,21 +1,36 @@
 .page-header
-  %h1 Listing recommendations
+  %h1 Recommendations
 
-= form_tag '', :method => :get do
-  = select_tag :course_module_id, options_for_select(User.find(current_user.id).study_path.course_modules.map{|l| [l.name, l.id] }, params[:course_module_id] ), :include_blank => 'All Course Modules'
-  = submit_tag 'Filter'
+.row
+.text-section This page shows the recommendations that suit your study path. The recommender system takes the lectures you already visited and calculates the best fitting lectures based on your grades.
+- if User.find(current_user.id).study_path.id == 1
+  .text-section Lectures marked in red are mandatory in your study path.
+
+.row
+= form_tag '',class: 'filter-form', :method => :get do
+  = select_tag :course_module_id ,options_for_select(User.find(current_user.id).study_path.course_modules.map{|l| [l.name, l.id] }, params[:course_module_id] ), :include_blank => 'All Course Modules', class:'filter-dropdown'
+  = button_tag 'Filter' , class: 'btn btn-default' , type: :submit
 
 .table-responsive
-  %table.table.table-striped.table-bordered.table-hover
+  %table.table.table-bordered.table-hover
     %thead
       %tr
         %th Course Name
         %th Expected Grade
         %th Course Modules
+        %th Semester
 
     %tbody
       - @recommendations.each do | recommendation |
-        %tr
-          %td= Course.find(recommendation.course_id).name
-          %td= recommendation.expected_grade.round(1)
-          %td= Course.find(recommendation.course_id).course_modules.pluck(:name).join(', ')
+        - if Belonging.where(:course_id => recommendation.course_id).first.mandatory && User.find(current_user.id).study_path.id == 1
+          %tr.bg-danger
+            %td= Course.find(recommendation.course_id).name
+            %td= recommendation.expected_grade.round(1)
+            %td= Course.find(recommendation.course_id).course_modules.pluck(:name).join(', ')
+            %td= Course.find(recommendation.course_id).semester
+        - else #Belonging.find(recommendation.course_id).mandatory
+          %tr
+            %td= Course.find(recommendation.course_id).name
+            %td= recommendation.expected_grade.round(1)
+            %td= Course.find(recommendation.course_id).course_modules.pluck(:name).join(', ')
+            %td= Course.find(recommendation.course_id).semester

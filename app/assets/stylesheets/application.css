@@ -13,3 +13,47 @@
  *= require_tree .
  *= require_self
  */
+body{
+  font-family: 'Open Sans'
+}
+
+.text-section{
+  width: 75%;
+  font-size: 18px;
+  margin-bottom:40px;
+}
+.red{
+  background-color: #f2dede;
+}
+
+.filter-form{
+  margin-bottom: 10px;
+}
+.filter-dropdown{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background-color:white;
+  background-image:url(caret-arrowhead-facing-down_318-36499-2.jpeg);
+  *background-image: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
+  background-position: right;
+  background-size: 8%;
+  background-repeat: no-repeat;
+
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: left;
+  white-space: nowrap;
+  *background-image: none;
+  *border: 1px solid transparent;
+  border-radius: 4px;
+}

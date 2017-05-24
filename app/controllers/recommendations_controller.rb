@@ -5,9 +5,9 @@ class RecommendationsController < ApplicationController
   # GET /recommendations.json
   def index
     if params[:course_module_id].nil? || params[:course_module_id].empty?
-      @recommendations = Recommendation.where(:user_id => current_user.id)
+      @recommendations = Recommendation.where(:user_id => current_user.id).order('expected_grade DESC')
     else
-      @recommendations = Recommendation.where(:user_id => current_user.id).filter(params[:course_module_id])
+      @recommendations = Recommendation.where(:user_id => current_user.id).filter(params[:course_module_id]).order('expected_grade DESC')
     end
 
     #TODO find other place to calculate values

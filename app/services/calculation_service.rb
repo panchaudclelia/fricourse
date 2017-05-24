@@ -42,7 +42,7 @@ class CalculationService
 			rated_courses = UsersCourse.all
 		end
 		#all_courses = Course.all
-		all_courses = Course.where(semester: ['SP 16 (cours semestriel)','FS 16 (Semesterkurs)','SS 16 (Semester Course)'])
+		all_courses = Course.where(semester: ['SP 17 (cours semestriel)','FS 17 (Semesterkurs)','SS 17 (Semester Course)', 'HS 16 (Semesterkurs)','SA 16 (Semester Course)', 'SA 16 (cours semestriel)'])
 		#loop through current semesters courses to calculate recommendations for the user
 		all_courses.find_each.with_index do |item, i_index|
 			#if sp.course_modules.ids.include?(item.belongings.pluck(:course_module_id).first)
