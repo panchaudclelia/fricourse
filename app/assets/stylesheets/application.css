@@ -14,13 +14,17 @@
  *= require_self
  */
 body{
-  font-family: 'Open Sans'
+  font-family: 'Open Sans', Helvetica, sans-serif;
 }
 
 .text-section{
   width: 75%;
   font-size: 18px;
+  font-weight: 100;
   margin-bottom:40px;
+}
+.text-section h3{
+  font-weight: 400;
 }
 .red{
   background-color: #f2dede;
@@ -56,4 +60,16 @@ body{
   *background-image: none;
   *border: 1px solid transparent;
   border-radius: 4px;
+}
+
+.logo{
+  font-size: 28px;
+  font-weight: 600;
+}
+.logo a{
+  color: white;
+}
+.logo a:hover{
+  text-decoration: none;
+  color: lightgrey;
 }

@@ -2,9 +2,15 @@
   %h1 Recommendations
 
 .row
-.text-section This page shows the recommendations that suit your study path. The recommender system takes the lectures you already visited and calculates the best fitting lectures based on your grades.
-- if User.find(current_user.id).study_path.id == 1
-  .text-section Lectures marked in red are mandatory in your study path.
+.text-section
+  %p
+    This page shows the recommendations that suit your study path. The recommender system takes the lectures you already visited and calculates the best fitting lectures based on your grades.
+    - if User.find(current_user.id).study_path.id == 1
+      .text-section
+        %p
+          Lectures highlighted in
+          %span.red red
+          are mandatory in your study path.
 
 .row
 = form_tag '',class: 'filter-form', :method => :get do
@@ -19,6 +25,7 @@
         %th Expected Grade
         %th Course Modules
         %th Semester
+        %th Details
 
     %tbody
       - @recommendations.each do | recommendation |
@@ -28,9 +35,11 @@
             %td= recommendation.expected_grade.round(1)
             %td= Course.find(recommendation.course_id).course_modules.pluck(:name).join(', ')
             %td= Course.find(recommendation.course_id).semester
+            %td= link_to 'Show Details', Course.find(recommendation.course_id)
         - else #Belonging.find(recommendation.course_id).mandatory
           %tr
             %td= Course.find(recommendation.course_id).name
             %td= recommendation.expected_grade.round(1)
             %td= Course.find(recommendation.course_id).course_modules.pluck(:name).join(', ')
             %td= Course.find(recommendation.course_id).semester
+            %td= link_to 'Show Details', Course.find(recommendation.course_id)
