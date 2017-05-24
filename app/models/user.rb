@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :courses, through: :users_courses
   has_many :recommendations
   #belongs_to :study_path
-  belongs_to :study_path
+  belongs_to :study_path, optional: true
   #has_one :study_path, through: :users_study_paths
 
 
