@@ -36,7 +36,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
      end
      bypass_sign_in resource, scope: resource_name
 
-    # ton cheni ici
     if prev_study_path != resource.study_path
       current_user.recommendations.destroy_all
       @calc_curr_user = CalculationService.new(current_user.id)

@@ -14,18 +14,15 @@ class CalculationService
 		require 'narray'
 
 		documents = []
-
-		#puts us_courses
 		all_courses = Course.all
-		#puts all_courses
+
 		Course.find_each do |course|
 			if course.description
-				#puts course.description.to_s
 				document = TfIdfSimilarity::Document.new(course.description)
 				documents.push(document)
 			end
 		end
-		#puts documents[1]
+
 		model = TfIdfSimilarity::TfIdfModel.new(documents, :library => :narray)
 		matrix = model.similarity_matrix
 
@@ -33,7 +30,6 @@ class CalculationService
 	end
 
 	def calculatePredictions(user_id, documents, model, matrix)
-		puts user_id
 		@recommendations = {}
 		user = User.find(user_id)
 		sp = user.study_path
@@ -41,16 +37,16 @@ class CalculationService
 		if rated_courses.present? == false
 			rated_courses = UsersCourse.all
 		end
-		#all_courses = Course.all
+
 		all_courses = Course.where(semester: ['SP 17 (cours semestriel)','FS 17 (Semesterkurs)','SS 17 (Semester Course)', 'HS 16 (Semesterkurs)','SA 16 (Semester Course)', 'SA 16 (cours semestriel)'])
-		#loop through current semesters courses to calculate recommendations for the user
+		#loop through current semesters courses to calculate predictions for the user
 		all_courses.find_each.with_index do |item, i_index|
-			#if sp.course_modules.ids.include?(item.belongings.pluck(:course_module_id).first)
 			if sp.course_modules.ids.any? {|i| item.belongings.pluck(:course_module_id).include?(i) }
 				num = 0
 				denum = 0
 
 				rated_courses.find_each.with_index do |j, j_index|
+					#calculate prediction with item-item collaborative filtering approach
 					if model.document_index(documents[item.id]) && model.document_index(documents[j.course.id])
 						tmp =  matrix[model.document_index(documents[item.id]), model.document_index(documents[j.course.id])] * j.grade.to_f
 						num = num + tmp
@@ -61,7 +57,6 @@ class CalculationService
 				end
 
 				if denum != 0
-					#@recommendations[item.id] = num/denum
 					expected_grade = num/denum
 					Recommendation.create(:user_id => user_id, :course_id => item.id, :expected_grade => expected_grade)
 				end

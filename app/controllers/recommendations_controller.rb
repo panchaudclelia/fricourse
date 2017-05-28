@@ -9,10 +9,6 @@ class RecommendationsController < ApplicationController
     else
       @recommendations = Recommendation.where(:user_id => current_user.id).filter(params[:course_module_id]).order('expected_grade DESC')
     end
-
-    #TODO find other place to calculate values
-    #@calc_curr_user = CalculationService.new(current_user.id)
-    #@recommendations = @calc_curr_user.calculateTfidfMatrix.sort_by { |k, v| -v }
   end
 
   # GET /recommendations/1
